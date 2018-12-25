@@ -3,7 +3,7 @@ import React from "react";
 class UserList extends React.Component {
   render() {
     return (
-        <table>
+        <table className="table table-striped table-bordered table-hover">
           <thead>
             <tr>
               <th>Sr. No.</th>

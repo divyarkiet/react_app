@@ -9,35 +9,35 @@ class UserForm extends React.Component {
 
   render() {
     return (
-      <form method="post" onSubmit={(e) => this.submitFormHandler(e)}>
-        <div className="form-field">
-          <label htmlFor="name">Name </label>
-          <input type="text" name="user_name" />
+      <form onSubmit={(e) => this.submitFormHandler(e)}>
+        <div className="form-group">
+          <label for="user_name">Name </label>
+          <input type="text" className="form-control" name="user_name" />
         </div>
         
-        <div className="form-field">
-          <label htmlFor="user_email">Email </label>
-          <input type="email" name="user_email" /><br />
+        <div className="form-group">
+          <label for="user_email">Email </label>
+          <input type="email"className="form-control"  name="user_email" />
         </div>
         
-        <div className="form-field">
-          <label htmlFor="user_gender">Gender:</label>
-          <input type="radio" name="user_gender" /> Male<br />
-          <input type="radio" name="user_gender" /> Female<br />
+        <div className="radio">
+          <label className="radio-inline"><input type="radio" name="user_gender" /> Male</label>
+          <label className="radio-inline"><input type="radio" name="user_gender" /> Female</label>
         </div>
         
-        <div className="form-field">
-          <label htmlFor="user_contact_no">Phone No:</label>
-          <input type="number" name="user_contact_no" /><br />
+        <div className="form-group">
+          <label for="user_contact_no">Phone No:</label>
+          <input type="number" className="form-control" name="user_contact_no" />
         </div>
         
-        <div className="form-field">
-          <label htmlFor="user_address">Address:</label>
-          <textarea name="user_address" /><br /><br />
+        <div className="form-group">
+          <label for="user_address">Address:</label>
+          <textarea className="form-control" name="user_address" />
         </div>
         
-        <div className="form-field">
-          <input type="submit" value="Submit" />
+        <div className="form-group">
+          <button type="reset" className="btn btn-default btn-md reset">Reset</button>
+          <button type="submit" className="btn btn-default btn-md">Submit</button>
         </div>
       </form>
     )
