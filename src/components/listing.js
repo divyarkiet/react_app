@@ -11,21 +11,25 @@ class Listing extends React.Component {
     this.state = {
       addUserForm: false
     }
+    this.userListing = this.userListing.bind(this);
   }
 
   addUserHandler(event){
-    console.log('hello');
     this.setState({addUserForm: true});
+  }
+
+  userListing(){
+    this.setState({addUserForm: false});
   }
 
   render() {
     return (
-      <div className="container">
-
-        <div className="table-top-row">
-          <button type="button" className="btn btn-default btn-md add-user" onClick={(e) => this.addUserHandler(e)}>Add User</button>
-          <input type="search" className="search" placeholder="Search" />
-        </div>
+      <div className="container">        
+        {!this.state.addUserForm ? (<div className="table-top-row">
+            <button type="button" className="btn btn-default btn-md add-user" onClick={(e) => this.addUserHandler(e)}>Add User</button>
+            <input type="search" className="search" placeholder="Search" />
+          </div>)  : <div className="table-top-row"><button type="button" className="btn btn-link" onClick={this.userListing}>Listing</button></div>}
+        
 
         <div className="table-mid-row">
          {this.state.addUserForm ? <UserForm /> : <UserList />}          
