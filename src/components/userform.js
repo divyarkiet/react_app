@@ -11,7 +11,7 @@ class UserForm extends React.Component {
       user_contact_no: '',
       user_address: ''
     };
-    this.data = [];
+    this.data = this.data || [];
     this.handleChange       = this.handleChange.bind(this);
     this.submitFormHandler  = this.submitFormHandler.bind(this);
   }
@@ -29,7 +29,7 @@ class UserForm extends React.Component {
   submitFormHandler(event){
     console.log('form is initialized');    
     event.preventDefault();
-    this.setData(this.state);
+    this.setData();
     this.setState({
       user_name: '',
       user_email: '',
@@ -39,7 +39,13 @@ class UserForm extends React.Component {
     });
   }
 
-  setData(dataArray){
+  getData(){
+    return JSON.parse(localStorage.getItem('list'));
+  }
+
+  setData(){
+    this.data = this.getData();
+    let dataArray = this.state;
     this.data.push(dataArray);
     localStorage.setItem('list', JSON.stringify(this.data));
   }
