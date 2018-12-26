@@ -19,6 +19,7 @@ class App extends Component {
     }
     return (
       <div className="App">
+        
         <header className="App-header">
           <div className="left-header">
             <img src={logo} className="App-logo" alt="logo" />
@@ -26,12 +27,13 @@ class App extends Component {
           </div>
           <div className="right-header">{displayName(user)}</div>
         </header>
+
         <section className="app-section">
           <Listing />                          
         </section>
-        <footer>
-          
-        </footer>
+
+        <footer></footer>
+        
       </div>
     );
   }
