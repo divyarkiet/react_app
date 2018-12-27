@@ -19,7 +19,7 @@ class UserList extends React.Component {
   }
 
   fetchUserList(){
-    let data = this.getData();    
+    let data = this.getData() || [];    
     return data.map((val, index) => {
       return (
         <tr key={index++}>

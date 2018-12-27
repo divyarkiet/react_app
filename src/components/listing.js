@@ -6,23 +6,30 @@ import Header from "./header";
 
 class Listing extends React.Component {
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
       addUser: false
-    }    
-  }  
-
+    }
+    this.togglePanel = this.togglePanel.bind(this);
+  }
+  togglePanel() {
+    const { addUser } = this.state;
+    this.setState({
+      addUser: !addUser
+    });
+  }
   render() {
+    const { addUser } = this.state;
     return (
       <div className="container">
 
-        <Header addUser={this.state.addUser}/>
+        <Header togglePanel={this.togglePanel} isAddUser={addUser} />
 
         <div className="table-mid-row">
-         {this.state.addUser ? <UserForm /> : <UserList />}          
+          {addUser ? <UserForm togglePanel={this.togglePanel}/> : <UserList />}
         </div>
-        
+
         <div className="table-bottom-row"></div>
       </div>
     );
