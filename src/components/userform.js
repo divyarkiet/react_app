@@ -1,9 +1,8 @@
-
 import React from "react";
 
 class UserForm extends React.Component {
 
-  constructor() {
+  constructor(){
     super();
     this.state = {
       userName: '',
@@ -12,11 +11,11 @@ class UserForm extends React.Component {
       userPhone: '',
       userAddress: ''
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.submitFormHandler = this.submitFormHandler.bind(this);
+    this.handleChange       = this.handleChange.bind(this);
+    this.submitFormHandler  = this.submitFormHandler.bind(this);
   }
 
-  handleChange(event) {
+  handleChange(event){
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -26,9 +25,9 @@ class UserForm extends React.Component {
     });
   }
 
-  submitFormHandler(event) {
-    const { togglePanel } = this.props;
+  submitFormHandler(event){
     console.log('form is initialized');
+    const { togglePanel } = this.props;
     event.preventDefault();
     this.setData();
     this.setState({
@@ -38,47 +37,47 @@ class UserForm extends React.Component {
       userPhone: '',
       userAddress: '',
     });
-    togglePanel();
   }
 
-  getData() {
-    return JSON.parse(localStorage.getItem('list'));
+  getData(){
+    return JSON.parse(localStorage.getItem('list')) || [];
   }
 
-  setData() {
-    const data = this.getData() || [];
+  setData(){
+    const data = this.getData();
     data.push(this.state);
     localStorage.setItem('list', JSON.stringify(data));
   }
 
   render() {
+    const {userName, userEmail, userPhone, userAddress} = this.state;
     return (
       <form method="post" onSubmit={this.submitFormHandler}>
         <div className="form-group">
           <label htmlFor="userName">Name </label>
-          <input type="text" className="form-control" name="userName" value={this.state.userName} onChange={this.handleChange} />
+          <input type="text" className="form-control" name="userName" value={userName}  onChange={this.handleChange} />
         </div>
-
+        
         <div className="form-group">
           <label htmlFor="userEmail">Email </label>
-          <input type="email" className="form-control" name="userEmail" value={this.state.userEmail} onChange={this.handleChange} />
+          <input type="email"className="form-control" name="userEmail" value={userEmail} onChange={this.handleChange} />
         </div>
-
+        
         <div className="radio">
           <label className="radio-inline"><input type="radio" name="userGender" value="M" onChange={this.handleChange} /> Male</label>
           <label className="radio-inline"><input type="radio" name="userGender" value="F" onChange={this.handleChange} /> Female</label>
         </div>
-
+        
         <div className="form-group">
           <label htmlFor="userPhone">Phone No:</label>
-          <input type="number" className="form-control" name="userPhone" value={this.state.userPhone} onChange={this.handleChange} />
+          <input type="number" className="form-control" name="userPhone" value={userPhone} onChange={this.handleChange} />
         </div>
-
+        
         <div className="form-group">
           <label htmlFor="userAddress">Address:</label>
-          <textarea className="form-control" name="userAddress" value={this.state.userAddress} onChange={this.handleChange} />
+          <textarea className="form-control" name="userAddress" value={userAddress} onChange={this.handleChange} />
         </div>
-
+        
         <div className="form-group">
           <button type="reset" className="btn btn-default btn-md reset">Reset</button>
           <button type="submit" className="btn btn-default btn-md">Submit</button>

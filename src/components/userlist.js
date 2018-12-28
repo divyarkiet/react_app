@@ -15,20 +15,20 @@ class UserList extends React.Component {
   }
 
   getData(){
-    return JSON.parse(localStorage.getItem('list'));
+    return JSON.parse(localStorage.getItem('list')) || [];
   }
 
   fetchUserList(){
-    let data = this.getData() || [];    
+    let data = this.getData();    
     return data.map((val, index) => {
       return (
         <tr key={index++}>
           <td>{index}</td>
-          <td>{val.user_name}</td>
-          <td>{val.user_email}</td>
-          <td>{val.user_gender}</td>
-          <td>{val.user_contact_no}</td>
-          <td>{val.user_address}</td>
+          <td>{val.userName}</td>
+          <td>{val.userEmail}</td>
+          <td>{val.userGender}</td>
+          <td>{val.userPhone}</td>
+          <td>{val.userAddress}</td>
           <td><a href="#" onClick={(e) => this.editUser(e, index)}>Edit</a> | <a href="#" onClick={(e) => this.deleteUser(e, index)}>Delete</a></td>
         </tr>
       )
