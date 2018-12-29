@@ -1,90 +1,43 @@
 import React from "react";
 
-class UserForm extends React.Component {
+const UserForm = (props) => {
 
-  constructor(){
-    super();
-    this.state = {
-      userName: '',
-      userEmail: '',
-      userGender: '',
-      userPhone: '',
-      userAddress: ''
-    };
-    this.handleChange       = this.handleChange.bind(this);
-    this.submitFormHandler  = this.submitFormHandler.bind(this);
-  }
+  const { handleChange, submitFormHandler, userData } = props;
+  const { userName, userEmail, userPhone, userAddress, userGender } = userData;
+  return (
+    <form method="post" onSubmit={submitFormHandler}>
+      <div className="form-group">
+        <label htmlFor="userName">Name </label>
+        <input type="text" className="form-control" name="userName" value={userName} onChange={(e) => handleChange(e)} />
+      </div>
 
-  handleChange(event){
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+      <div className="form-group">
+        <label htmlFor="userEmail">Email </label>
+        <input type="email" className="form-control" name="userEmail" value={userEmail} onChange={(e) => handleChange(e)} />
+      </div>
 
-    this.setState({
-      [name]: value
-    });
-  }
+      <div className="radio">
+        <label className="radio-inline"><input type="radio" name="userGender" checked={userGender === 'M'} value="M" onChange={(e) => handleChange(e)} /> Male</label>
+        <label className="radio-inline"><input type="radio" name="userGender" checked={userGender === 'F'} value="F" onChange={(e) => handleChange(e)} /> Female</label>
+      </div>
 
-  submitFormHandler(event){
-    console.log('form is initialized');
-    const { togglePanel } = this.props;
-    event.preventDefault();
-    this.setData();
-    this.setState({
-      userName: '',
-      userEmail: '',
-      userGender: '',
-      userPhone: '',
-      userAddress: '',
-    });
-  }
+      <div className="form-group">
+        <label htmlFor="userPhone">Phone No:</label>
+        <input type="number" className="form-control" name="userPhone" value={userPhone} onChange={(e) => handleChange(e)} />
+      </div>
 
-  getData(){
-    return JSON.parse(localStorage.getItem('list')) || [];
-  }
+      <div className="form-group">
+        <label htmlFor="userAddress">Address:</label>
+        <textarea className="form-control" name="userAddress" value={userAddress} onChange={(e) => handleChange(e)} />
+      </div>
 
-  setData(){
-    const data = this.getData();
-    data.push(this.state);
-    localStorage.setItem('list', JSON.stringify(data));
-  }
+      <div className="form-group">
+        <button type="reset" className="btn btn-default btn-md reset">Reset</button>
+        <button type="submit" className="btn btn-default btn-md">Submit</button>
+      </div>
+    </form>
+  )
 
-  render() {
-    const {userName, userEmail, userPhone, userAddress} = this.state;
-    return (
-      <form method="post" onSubmit={this.submitFormHandler}>
-        <div className="form-group">
-          <label htmlFor="userName">Name </label>
-          <input type="text" className="form-control" name="userName" value={userName}  onChange={this.handleChange} />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="userEmail">Email </label>
-          <input type="email"className="form-control" name="userEmail" value={userEmail} onChange={this.handleChange} />
-        </div>
-        
-        <div className="radio">
-          <label className="radio-inline"><input type="radio" name="userGender" value="M" onChange={this.handleChange} /> Male</label>
-          <label className="radio-inline"><input type="radio" name="userGender" value="F" onChange={this.handleChange} /> Female</label>
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="userPhone">Phone No:</label>
-          <input type="number" className="form-control" name="userPhone" value={userPhone} onChange={this.handleChange} />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="userAddress">Address:</label>
-          <textarea className="form-control" name="userAddress" value={userAddress} onChange={this.handleChange} />
-        </div>
-        
-        <div className="form-group">
-          <button type="reset" className="btn btn-default btn-md reset">Reset</button>
-          <button type="submit" className="btn btn-default btn-md">Submit</button>
-        </div>
-      </form>
-    )
-  }
 }
 
 export default UserForm;

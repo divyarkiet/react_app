@@ -1,41 +1,7 @@
 import React from "react";
 
-class UserList extends React.Component {
-
-  shouldComponentUpdate(nextProps, nextState){
-    console.log('shouldComponentUpdate called');
-  }
-
-  editUser(event, index){
-    console.log('editUser: ' + index);
-  }
-
-  deleteUser(event, index){
-    console.log('deleteUser: ' + index);
-  }
-
-  getData(){
-    return JSON.parse(localStorage.getItem('list')) || [];
-  }
-
-  fetchUserList(){
-    let data = this.getData();    
-    return data.map((val, index) => {
-      return (
-        <tr key={index++}>
-          <td>{index}</td>
-          <td>{val.userName}</td>
-          <td>{val.userEmail}</td>
-          <td>{val.userGender}</td>
-          <td>{val.userPhone}</td>
-          <td>{val.userAddress}</td>
-          <td><a href="#" onClick={(e) => this.editUser(e, index)}>Edit</a> | <a href="#" onClick={(e) => this.deleteUser(e, index)}>Delete</a></td>
-        </tr>
-      )
-    })
-  }
-
-  render() {
+const UserList = (props) => {
+const {data, editUser, deleteUser} = props;
     return (
       <table className="table table-striped table-bordered table-hover">
         <thead>
@@ -50,19 +16,24 @@ class UserList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.fetchUserList()}
+          {
+            data.map((val, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{val.userName}</td>
+                  <td>{val.userEmail}</td>
+                  <td>{val.userGender}</td>
+                  <td>{val.userPhone}</td>
+                  <td>{val.userAddress}</td>
+                  <td><a href="#" onClick={(e) => editUser(e, index)}>Edit</a> | <a href="#" onClick={(e) => deleteUser(e, index)}>Delete</a></td>
+                </tr>
+              )
+            })
+          }
         </tbody>
       </table>
     );
-  }
-
-  getSnapshotBeforeUpdate(prevProps, prevState){
-    console.log('getSnapshotBeforeUpdate called');
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot){
-    console.log('componentDidUpdate called');
-  }  
 }
 
 export default UserList;

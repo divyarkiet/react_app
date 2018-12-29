@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Listing from './components/listing.js';
+import Listing from './components/userProfileContainer';
 
 class App extends Component {
   constructor(){
